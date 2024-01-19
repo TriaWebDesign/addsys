@@ -1,24 +1,10 @@
+"use client";
 import Link from "next/link";
-
-const admissions = [
-  {
-    name: "John Doe",
-    illness: "ADHD",
-    flag: false,
-  },
-  {
-    name: "Jane Smith",
-    illness: "Hyper",
-    flag: true,
-  },
-  {
-    name: "Bob Johnson",
-    illness: "Mid",
-    flag: false,
-  },
-];
+import { useGlobalState } from "../__components/global-provider";
 
 const AdmissionPage = () => {
+  const { admissions } = useGlobalState() ?? { admissions: [] };
+
   return (
     <div className="max-h-screen h-screen p-10 overflow-y-auto">
       <h1>Admissions</h1>
@@ -35,7 +21,7 @@ const AdmissionPage = () => {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Illness
+                Learning Disorder
               </th>
               <th scope="col" className="px-6 py-3">
                 Flag
@@ -55,9 +41,9 @@ const AdmissionPage = () => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {admission.name}
+                  {admission.firstname + " " + admission.lastname}
                 </th>
-                <td className="px-6 py-4">{admission.illness}</td>
+                <td className="px-6 py-4">{admission.learningDisorder}</td>
                 <td className="px-6 py-4">
                   <div
                     className={`p-2 w-5 ${
@@ -66,7 +52,7 @@ const AdmissionPage = () => {
                   ></div>
                 </td>
                 <td className="px-6 py-4 flex gap-4">
-                  <Link href={`/admin/admissions/${index}`}>View</Link>
+                  <Link href={`/admissions/${admission.id}`}>View</Link>
                   <button className="text-red-500">Delete</button>
                 </td>
               </tr>

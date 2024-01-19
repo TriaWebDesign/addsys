@@ -18,7 +18,6 @@ export default function FormPage() {
   // Function to handle form submission
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-
     // Validation logic (you may add more validation as needed)
     if (
       !formData.firstname ||
@@ -31,9 +30,8 @@ export default function FormPage() {
       // You may also set an error state in your component and display an error message to the user
       return;
     }
-
     try {
-      const response = await axios.post("/api/admission", formData);
+      const response = await axios.post("/api/form", formData);
 
       if (response.status === 200) {
         const data = response.data;
@@ -62,11 +60,18 @@ export default function FormPage() {
   // Function to handle file input change
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
-
-    setFormData({
-      ...formData,
-      documentImage: file,
-    });
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // @ts-ignore
+        const base64String = reader.result.split(",")[1];
+        setFormData({
+          ...formData,
+          documentImage: base64String,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (

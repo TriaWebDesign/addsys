@@ -24,14 +24,14 @@ export async function POST(req: Request) {
       data: {
         firstname,
         lastname,
-        age,
+        age: 18,
         learningDisorder,
         email,
         phone,
         address,
         admissionStatus: "Pending",
         flag: false,
-        documentImage: Buffer.from(documentImage, "base64"), // Convert base64 image to buffer
+        documentImage: Buffer.from(documentImage, "base64"),
       },
     });
 

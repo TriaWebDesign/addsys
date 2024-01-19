@@ -1,11 +1,21 @@
-const statistics = [
-  { title: "Admissions Today", value: 3 },
-  { title: "Admissions This Week", value: 10 },
-  { title: "Admissions This Month", value: 10 },
-  { title: "Total Admissions", value: 10 },
-];
+"use client";
+
+import { useGlobalState } from "../__components/global-provider";
+import { countSubmissions } from "../__utils/date";
 
 export default function DashboardPage() {
+  const { admissions } = useGlobalState() ?? { admissions: [] };
+  const submissionsToday = countSubmissions(admissions, "day");
+  const submissionsThisWeek = countSubmissions(admissions, "week");
+  const submissionsThisMonth = countSubmissions(admissions, "month");
+
+  const statistics = [
+    { title: "Total Admissions", value: admissions.length },
+    { title: "Admission Today", value: submissionsToday },
+    { title: "Admission This Week", value: submissionsThisWeek },
+    { title: "Admission This Month", value: submissionsThisMonth },
+  ];
+
   return (
     <div className="max-h-screen h-screen p-10 overflow-y-auto">
       <h1 className="md:ml-0 ml-4 text-2xl font-semibold mb-4">Dashboard</h1>
