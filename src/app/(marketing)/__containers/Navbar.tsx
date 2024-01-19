@@ -3,6 +3,7 @@ import Link from "next/link";
 const links = [
   { tag: "Home", href: "/" },
   { tag: "About", href: "/about" },
+  { tag: "Accomodations", href: "/accomodations" },
   { tag: "Admission", href: "/form" },
 ];
 
@@ -24,8 +25,8 @@ export default function Navbar() {
         </div>
       </div>
       <div>
-        <button className="px-4 py-1 rounded-md bg-sky-500 text-white">
-          <Link href="/admin">Login</Link>
+        <button className="px-4 py-1 rounded-md bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white">
+          <Link href="/login">Login</Link>
         </button>
       </div>
     </nav>

@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Admission {
+  id               String   @id @default(cuid()) @map("_id")
+  firstname        String
+  lastname         String
+  age              Int
+  learningDisorder String
+  email            String   @unique
+  phone            String?
+  address          String?
+  admissionStatus  String
+  flag             Boolean
+  documentImage    Bytes
+  submittedAt      DateTime @default(now()) @map("created_at")
+}

@@ -1,12 +1,10 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <main className="w-full h-screen">
+    <main className="w-full h-screen p-10">
       <main className="flex flex-col items-center justify-center">
-        <div className="p-10">
-          <h1 className="text-6xl font-bold">
-            We Accept Mentally Ill Students
+        <div className="mb-10">
+          <h1 className="text-6xl font-bold mb-5">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
           </h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, nisi
@@ -15,8 +13,38 @@ export default function Home() {
             alias nihil.
           </p>
         </div>
-        <Image src="/mental.png" width={300} height={800} alt="mental" />
+        <section className="w-full">
+          <button className="px-5 py-2 rounded-lg bg-black text-xl text-white">
+            Learn More
+          </button>
+        </section>
       </main>
+      <section className="w-full flex justify-between gap-4 mt-10 text-white">
+        <div className="bg-slate-800 rounded-lg p-5">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+            delectus eveniet sapiente assumenda. Necessitatibus quasi, culpa
+            cupiditate est officia hic autem exercitationem mollitia consectetur
+            aut tenetur dicta ab quisquam maxime!
+          </p>
+        </div>
+        <div className="bg-slate-800 rounded-lg p-5">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+            delectus eveniet sapiente assumenda. Necessitatibus quasi, culpa
+            cupiditate est officia hic autem exercitationem mollitia consectetur
+            aut tenetur dicta ab quisquam maxime!
+          </p>
+        </div>
+        <div className="bg-slate-800 rounded-lg p-5">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+            delectus eveniet sapiente assumenda. Necessitatibus quasi, culpa
+            cupiditate est officia hic autem exercitationem mollitia consectetur
+            aut tenetur dicta ab quisquam maxime!
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
