@@ -14,7 +14,8 @@ export async function analyze(document: Buffer) {
   };
   const prompt = `Check if the document is one of the valid types: ${valid_docs.join(
     ", "
-  )}. Your response must be a valid format without additional characters. For example, if valid: {"flag":false}. If invalid: {"flag":true} - The Data:`;
+  )}. Your response must be a valid format without additional characters. For example, if valid: {"flag":false, "description": //describe the document
+}. If invalid: {"flag":true, "description": //describe the document} - The Data:`;
   console.log(prompt);
 
   let response;

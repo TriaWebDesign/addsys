@@ -1,8 +1,10 @@
 "use client";
 import { submitAdmission } from "@/utils/actions/admission.action";
 import { useState } from "react";
+import Submitted from "./__containers/submitted";
 
 export default function FormPage() {
+  const [submitted, setSubmitted] = useState(false);
   // State to manage form data
   const [formData, setFormData] = useState({
     firstname: "",
@@ -18,11 +20,11 @@ export default function FormPage() {
   // Function to handle form submission
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setSubmitted(true);
     try {
-      submitAdmission(formData);
+      await submitAdmission(formData);
     } catch (error) {
       console.error("Error submitting form data:", error);
-      // You may set an error state in your component and display an error message to the user
     }
   };
 
@@ -51,11 +53,12 @@ export default function FormPage() {
       reader.readAsDataURL(file);
     }
   };
+  if (submitted) return <Submitted />;
   return (
-    <main className="h-screen bg-gradient-to-r from-green-500 to-green-700 flex justify-around items-center drop-shadow-lg">
+    <main className="h-screen bg-gradient-to-r from-green-500 to-green-700 flex justify-around items-center drop-shadow-lg p-4">
       <form
         onSubmit={handleSubmit}
-        className="p-10 flex flex-col bg-white rounded-lg gap-3 w-[50%]"
+        className="p-6 flex flex-col bg-white rounded-lg gap-3 w-[500px]"
       >
         {/* Form fields */}
         <input
@@ -65,6 +68,7 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="First Name"
           className="p-2 rounded-md border"
+          required
         />
         <input
           type="text"
@@ -73,6 +77,7 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="Last Name"
           className="p-2 rounded-md border"
+          required
         />
         <input
           type="number"
@@ -81,12 +86,14 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="Age"
           className="p-2 rounded-md border"
+          required
         />
         <select
           name="learningDisorder"
           className="p-2 rounded-md border"
           value={formData.learningDisorder}
           onChange={handleInputChange}
+          required
         >
           <option value="" disabled hidden>
             Select Learning Disorder
@@ -106,6 +113,7 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="Email"
           className="p-2 rounded-md border"
+          required
         />
         <input
           type="tel"
@@ -114,6 +122,7 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="Phone"
           className="p-2 rounded-md border"
+          required
         />
         <input
           type="text"
@@ -122,6 +131,7 @@ export default function FormPage() {
           onChange={handleInputChange}
           placeholder="Address"
           className="p-2 rounded-md border"
+          required
         />
 
         {/* File input for document image */}
@@ -131,13 +141,14 @@ export default function FormPage() {
           onChange={handleFileChange}
           accept="image/*"
           className="p-2 rounded-md border"
+          required
         />
         <button type="submit" className="p-3 bg-black text-white rounded-lg">
           Submit
         </button>
       </form>
 
-      <div className="max-w-[30%]">
+      <div className="max-w-[30%] hidden md:block">
         <h1 className="text-3xl text-white font-semibold">
           Lorem ipsum dolor sit amet consectetur
         </h1>

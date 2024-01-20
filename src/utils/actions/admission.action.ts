@@ -22,6 +22,8 @@ export async function submitAdmission(formData: any) {
         documentImage: image,
       },
     });
+    revalidatePath("/admissions");
+    revalidatePath("/dashboard");
   } catch (error) {
     console.log(error);
     throw error;

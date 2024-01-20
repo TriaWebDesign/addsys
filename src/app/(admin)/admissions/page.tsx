@@ -2,10 +2,11 @@ import { getAdmissions } from "@/utils/actions/admission.action";
 import { Admission } from "@prisma/client";
 import Link from "next/link";
 import DeleteButton from "../__components/delete-btn";
+import { FaFlag } from "react-icons/fa";
 
 const AdmissionPage = async () => {
   const admissions: Admission[] = await getAdmissions();
-  
+
   return (
     <div className="max-h-screen h-screen p-10 overflow-y-auto">
       <h1 className="md:ml-0 ml-4 text-2xl font-semibold mb-4">Admissions</h1>
@@ -35,7 +36,7 @@ const AdmissionPage = async () => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="max-h-[400px] overflow-y-auto">
             {admissions.reverse().map((admission, index) => (
               <tr
                 key={index}
@@ -49,11 +50,11 @@ const AdmissionPage = async () => {
                 </th>
                 <td className="px-6 py-4">{admission.learningDisorder}</td>
                 <td className="px-6 py-4">
-                  <div
-                    className={`p-2 w-5 ${
-                      admission.flag ? "bg-red-500" : "bg-green-500"
+                  <FaFlag
+                    className={`${
+                      admission.flag ? "text-red-500" : "text-green-500"
                     }`}
-                  ></div>
+                  />
                 </td>
                 <td className="px-6 py-4">
                   {admission.submittedAt.toLocaleDateString()}
