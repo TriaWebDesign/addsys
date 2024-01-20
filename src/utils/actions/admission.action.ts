@@ -1,3 +1,4 @@
+"use server";
 import { Admission } from "@prisma/client";
 import prisma from "../connect";
 
@@ -7,14 +8,14 @@ export async function submitAdmission(formData: FormData) {
       data: {
         firstname: formData.get("firstname") as string,
         lastname: formData.get("firstname") as string,
-        age: formData.get("age") as unknown as number,
+        age: parseInt(formData.get("age") as string),
         learningDisorder: formData.get("learningDisorder") as string,
         email: formData.get("email") as string,
         phone: formData.get("phone") as string,
         address: formData.get("address") as string,
         admissionStatus: "Pending",
         flag: false,
-        documentImage: formData.get("documentImage") as unknown as Buffer,
+        documentImage: Buffer.from("123123", "base64"),
       },
     });
   } catch (error) {
