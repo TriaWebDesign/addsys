@@ -5,10 +5,10 @@ import DeleteButton from "../__components/delete-btn";
 
 const AdmissionPage = async () => {
   const admissions: Admission[] = await getAdmissions();
-
+  
   return (
     <div className="max-h-screen h-screen p-10 overflow-y-auto">
-      <h1>Admissions</h1>
+      <h1 className="md:ml-0 ml-4 text-2xl font-semibold mb-4">Admissions</h1>
       <div className="relative overflow-x-auto mt-10">
         <input
           type="text"
@@ -26,6 +26,9 @@ const AdmissionPage = async () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Flag
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Date Submitted
               </th>
               <th scope="col" className="px-6 py-3">
                 Actions
@@ -51,6 +54,9 @@ const AdmissionPage = async () => {
                       admission.flag ? "bg-red-500" : "bg-green-500"
                     }`}
                   ></div>
+                </td>
+                <td className="px-6 py-4">
+                  {admission.submittedAt.toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 flex gap-4">
                   <Link href={`/admissions/${admission.id}`}>View</Link>

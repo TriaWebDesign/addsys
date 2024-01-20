@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <main className="h-screen flex flex-col gap-10 px-10">
+    <main className="h-screen flex flex-col gap-4 p-10">
       <h1 className="text-3xl font-bold">About Us</h1>
       <section>
         <h3 className=" font-semibold">Vision</h3>

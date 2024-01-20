@@ -2,21 +2,24 @@
 import { Admission } from "@prisma/client";
 import prisma from "../connect";
 import { revalidatePath } from "next/cache";
+import { analyze } from "../ai";
 
-export async function submitAdmission(formData: FormData) {
+export async function submitAdmission(formData: any) {
   try {
-    const new_admission = await prisma.admission.create({
+    const image = Buffer.from(formData.documentImage, "base64");
+    const flag = await analyze(image);
+    await prisma.admission.create({
       data: {
-        firstname: formData.get("firstname") as string,
-        lastname: formData.get("lastname") as string,
-        age: parseInt(formData.get("age") as string),
-        learningDisorder: formData.get("learningDisorder") as string,
-        email: formData.get("email") as string,
-        phone: formData.get("phone") as string,
-        address: formData.get("address") as string,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        age: parseInt(formData.age),
+        learningDisorder: formData.learningDisorder,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
         admissionStatus: "Pending",
-        flag: false,
-        documentImage: Buffer.from("123123", "base64"),
+        flag: flag.flag,
+        documentImage: image,
       },
     });
   } catch (error) {
