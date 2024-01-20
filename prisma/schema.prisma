@@ -17,8 +17,8 @@ model Admission {
   age              Int
   learningDisorder String
   email            String   @unique
-  phone            String?
-  address          String?
+  phone            String
+  address          String
   admissionStatus  String
   flag             Boolean
   documentImage    Bytes

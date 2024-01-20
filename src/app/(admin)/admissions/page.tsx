@@ -1,9 +1,9 @@
-"use client";
+import { getAdmissions } from "@/utils/actions/admission.action";
+import { Admission } from "@prisma/client";
 import Link from "next/link";
-import { useGlobalState } from "../__components/global-provider";
 
-const AdmissionPage = () => {
-  const { admissions } = useGlobalState() ?? { admissions: [] };
+const AdmissionPage = async () => {
+  const admissions: Admission[] = await getAdmissions();
 
   return (
     <div className="max-h-screen h-screen p-10 overflow-y-auto">

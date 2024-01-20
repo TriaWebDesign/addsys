@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import SidebarProvider from "./__components/sidebar/sidebar-provider";
-import { GlobalProvider } from "./__components/global-provider";
 
 export const metadata: Metadata = {
   title: "School - Admin",
@@ -15,9 +14,7 @@ export default function AdminLayout({
   return (
     <main className="bg-slate-100 flex min-h-screen">
       <SidebarProvider />
-      <GlobalProvider>
-        <section className="flex-auto overflow-y-auto">{children}</section>
-      </GlobalProvider>
+      <section className="flex-auto overflow-y-auto">{children}</section>
     </main>
   );
 }

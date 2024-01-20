@@ -1,10 +1,8 @@
-"use client";
+import { getAdmissions } from "@/utils/actions/admission.action";
+import { countSubmissions } from "../../../utils/date";
 
-import { useGlobalState } from "../__components/global-provider";
-import { countSubmissions } from "../__utils/date";
-
-export default function DashboardPage() {
-  const { admissions } = useGlobalState() ?? { admissions: [] };
+export default async function DashboardPage() {
+  const admissions = await getAdmissions();
   const submissionsToday = countSubmissions(admissions, "day");
   const submissionsThisWeek = countSubmissions(admissions, "week");
   const submissionsThisMonth = countSubmissions(admissions, "month");
