@@ -1,6 +1,7 @@
 "use server";
 import { Admission } from "@prisma/client";
 import prisma from "../connect";
+import { revalidatePath } from "next/cache";
 
 export async function submitAdmission(formData: FormData) {
   try {
@@ -42,6 +43,20 @@ export async function findAdmission(id: string): Promise<Admission | null> {
       },
     });
     return admission;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function deleteAdmission(id: string) {
+  try {
+    await prisma.admission.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/admissions");
   } catch (error) {
     console.log(error);
     throw error;

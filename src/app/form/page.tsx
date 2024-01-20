@@ -1,4 +1,3 @@
-"use client";
 import { submitAdmission } from "@/utils/actions/admission.action";
 
 export default function FormPage() {

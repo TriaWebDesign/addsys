@@ -1,6 +1,7 @@
 import { getAdmissions } from "@/utils/actions/admission.action";
 import { Admission } from "@prisma/client";
 import Link from "next/link";
+import DeleteButton from "../__components/delete-btn";
 
 const AdmissionPage = async () => {
   const admissions: Admission[] = await getAdmissions();
@@ -53,7 +54,7 @@ const AdmissionPage = async () => {
                 </td>
                 <td className="px-6 py-4 flex gap-4">
                   <Link href={`/admissions/${admission.id}`}>View</Link>
-                  <button className="text-red-500">Delete</button>
+                  <DeleteButton id={admission.id} />
                 </td>
               </tr>
             ))}
