@@ -8,7 +8,7 @@ export async function submitAdmission(formData: FormData) {
     const new_admission = await prisma.admission.create({
       data: {
         firstname: formData.get("firstname") as string,
-        lastname: formData.get("firstname") as string,
+        lastname: formData.get("lastname") as string,
         age: parseInt(formData.get("age") as string),
         learningDisorder: formData.get("learningDisorder") as string,
         email: formData.get("email") as string,

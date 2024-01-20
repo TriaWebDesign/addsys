@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import SidebarProvider from "./__components/sidebar/sidebar-provider";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "School - Admin",
@@ -14,7 +15,9 @@ export default function AdminLayout({
   return (
     <main className="bg-slate-100 flex min-h-screen">
       <SidebarProvider />
-      <section className="flex-auto overflow-y-auto">{children}</section>
+      <section className="flex-auto overflow-y-auto">
+        <Suspense fallback={<p>Loading feed...</p>}>{children}</Suspense>
+      </section>
     </main>
   );
 }

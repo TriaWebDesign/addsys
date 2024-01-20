@@ -33,7 +33,7 @@ const AdmissionPage = async () => {
             </tr>
           </thead>
           <tbody>
-            {admissions.map((admission, index) => (
+            {admissions.reverse().map((admission, index) => (
               <tr
                 key={index}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
