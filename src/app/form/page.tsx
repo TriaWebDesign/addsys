@@ -2,6 +2,7 @@
 import { submitAdmission } from "@/utils/actions/admission.action";
 import { useState } from "react";
 import Submitted from "./__containers/submitted";
+import Image from "next/image";
 
 export default function FormPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -16,6 +17,7 @@ export default function FormPage() {
     address: "",
     documentImage: null,
   });
+  const [imagePreview, setImagePreview] = useState("");
 
   // Function to handle form submission
   const handleSubmit = async (event: any) => {
@@ -49,6 +51,8 @@ export default function FormPage() {
           ...formData,
           documentImage: base64String,
         });
+        // Set image preview
+        setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -133,16 +137,26 @@ export default function FormPage() {
           className="p-2 rounded-md border"
           required
         />
-
-        {/* File input for document image */}
-        <input
-          type="file"
-          name="documentImage"
-          onChange={handleFileChange}
-          accept="image/*"
-          className="p-2 rounded-md border"
-          required
-        />
+        <div className="flex gap-4">
+          <input
+            type="file"
+            name="documentImage"
+            onChange={handleFileChange}
+            accept="image/*"
+            className="p-2 rounded-md border"
+            required
+          />
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              width={100}
+              height={100}
+              alt="Document Preview"
+              className="mt-3 rounded-md border"
+              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            />
+          )}
+        </div>
         <button type="submit" className="p-3 bg-black text-white rounded-lg">
           Submit
         </button>

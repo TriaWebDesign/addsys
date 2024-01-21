@@ -3,11 +3,25 @@ import { Admission } from "@prisma/client";
 import prisma from "../connect";
 import { revalidatePath } from "next/cache";
 import { analyze } from "../ai";
+import { uid } from "uid";
+import { writeFile } from "fs/promises";
 
 export async function submitAdmission(formData: any) {
+  const path = require("path");
+  const currentWorkingDirectory = process.cwd();
+
   try {
     const image = Buffer.from(formData.documentImage, "base64");
     const flag = await analyze(image);
+    const filename = uid() + ".jpg";
+
+    const docPhotoPath = path.join(
+      currentWorkingDirectory,
+      "public",
+      "uploads",
+      filename
+    );
+
     await prisma.admission.create({
       data: {
         firstname: formData.firstname,
@@ -19,9 +33,11 @@ export async function submitAdmission(formData: any) {
         address: formData.address,
         admissionStatus: "Pending",
         flag: flag.flag,
-        documentImage: image,
+        documentImage: `/uploads/${filename}`,
       },
     });
+    await writeFile(docPhotoPath, image);
+
     revalidatePath("/admissions");
     revalidatePath("/dashboard");
   } catch (error) {

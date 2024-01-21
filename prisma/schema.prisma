@@ -21,6 +21,6 @@ model Admission {
   address          String
   admissionStatus  String
   flag             Boolean
-  documentImage    Bytes
+  documentImage    String
   submittedAt      DateTime @default(now()) @map("created_at")
 }

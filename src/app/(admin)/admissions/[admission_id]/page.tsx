@@ -1,6 +1,7 @@
 import { findAdmission } from "@/utils/actions/admission.action";
 import { Admission } from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function AdmissionPage({
   params,
@@ -50,6 +51,14 @@ export default async function AdmissionPage({
             <p className="text-zinc-500">Email</p>
             <p className="text-2xl">{admission.email}</p>
           </div>
+        </div>
+        <div>
+          <Image
+            src={admission.documentImage}
+            width={400}
+            height={400}
+            alt="doc"
+          />
         </div>
       </div>
     </main>
